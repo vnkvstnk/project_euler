@@ -8,7 +8,7 @@ def divisors_sum(number):
     divisors = []
     for i in range(1, int(number / 2) + 1):
         if number % i == 0:
-            divisors.append(int(i))
+            divisors.append(i)
     return sum(divisors)
 
 
