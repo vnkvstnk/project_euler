@@ -6,11 +6,10 @@
 # if this sum exceeds n.
 # As 12 is the smallest abundant number, 1 + 2 + 3 + 4 + 6 = 16, the smallest number that can be written
 # as the sum of two abundant numbers is 24. By mathematical analysis, it can be shown that all integers
-# greater than 28123 can be written as the sum of two abundant numbers. However, this upper limit cannot
+# greater than 28123 (in fact, it's 20161) can be written as the sum of two abundant numbers. However, this upper limit cannot
 # be reduced any further by analysis even though it is known that the greatest number that cannot be expressed
 # as the sum of two abundant numbers is less than this limit.
 # Find the sum of all the positive integers which cannot be written as the sum of two abundant numbers.
-from time import time
 def is_abundant(number):
     divisors = []
     for i in range(1, int(number / 2) + 1):
@@ -18,12 +17,10 @@ def is_abundant(number):
             divisors.append(i)
     return sum(divisors) > number
 
-start = time()
-not_abundant = []
-for i in range(0, 28123 + 1):
-    if not is_abundant(i):
-        not_abundant.append(i)
-stop = time()
-print(len(not_abundant))
-print(sum(not_abundant))
-print(f'This took {stop - start} seconds')
+
+def is_abundantsum(number):
+    return any(number - i in abundant for i in abundant)
+
+
+abundant = set(x for x in range(1, 20162) if is_abundant(x))
+print(sum([x for x in range(1, 20162) if not is_abundantsum(x)]))
